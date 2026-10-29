@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Le Palmier. Cuisine savoureuse, boissons fraîches et ambiance conviviale.">
+<title>Le Palmier</title>
+<style>
+:root{
+  --green:#174c36; --green-dark:#103827; --gold:#d9a441;
+  --cream:#fbf7ef; --ink:#24312a; --muted:#68736c; --white:#fff;
+  --shadow:0 14px 38px rgba(20,45,31,.10); --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.container{width:min(1120px,calc(100% - 40px));margin-inline:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(251,247,239,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(23,76,54,.10)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-size:1.35rem;font-weight:850;color:var(--green);letter-spacing:-.04em;white-space:nowrap}
+.brand span{color:var(--gold);margin-right:7px}
+nav{display:flex;align-items:center;gap:28px}
+nav a{font-size:.94rem;font-weight:650;color:#425148;transition:color .2s}
+nav a:hover{color:var(--gold)}
+.menu-toggle{display:none;background:var(--green);color:white;border:0;border-radius:10px;padding:9px 12px;font-size:1.1rem}
+.hero{position:relative;overflow:hidden;background:linear-gradient(115deg,rgba(12,43,30,.94),rgba(23,76,54,.83)),url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85") center/cover;color:white}
+.hero-inner{min-height:590px;padding-block:100px 88px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:48px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;text-transform:uppercase;letter-spacing:.16em;font-size:.76rem;font-weight:800;color:var(--gold)}
+.eyebrow:before{content:"";width:28px;height:2px;background:var(--gold)}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(3rem,7vw,5.7rem);line-height:.98;letter-spacing:-.065em;margin:18px 0}
+h1 span{display:block;color:#f1c56b;font-weight:500;font-family:Georgia,serif;font-style:italic;font-size:.55em;letter-spacing:-.02em;margin-top:14px}
+.hero p{max-width:590px;color:#e5eee7;font-size:1.08rem}
+.actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 20px;border-radius:999px;font-weight:750;border:1px solid transparent;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--gold);color:#1b281e}
+.btn-outline{border-color:rgba(255,255,255,.55);color:white;background:rgba(255,255,255,.06)}
+.hero-card{border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.10);backdrop-filter:blur(10px);border-radius:var(--radius);padding:28px;max-width:350px;justify-self:end}
+.hero-card .emoji{font-size:2rem}
+.hero-card h3{font-size:1.25rem;margin:12px 0 3px}
+.hero-card p{font-size:.95rem;margin:0;color:#dce8df}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-35px;position:relative;z-index:2}
+.feature{padding:24px 20px;background:white;border:1px solid #eee9df;border-radius:18px;box-shadow:var(--shadow)}
+.feature .emoji{font-size:1.6rem}
+.feature h3{font-size:1rem;margin:10px 0 2px}
+.feature p{color:var(--muted);font-size:.88rem;margin:0}
+section{padding:92px 0}
+.section-head{text-align:center;max-width:650px;margin:0 auto 38px}
+.section-head .eyebrow{justify-content:center}
+h2{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.05em;line-height:1.12;color:var(--green);margin:12px 0}
+.section-head p{color:var(--muted);margin-bottom:0}
+.dishes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.dish{background:white;border:1px solid #eee9df;border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 28px rgba(20,45,31,.06);transition:transform .25s,box-shadow .25s}
+.dish:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.dish-photo{height:235px;position:relative;background:#e6e0d3}
+.dish-photo .tag{position:absolute;left:16px;top:16px;background:white;color:var(--green);font-size:.75rem;font-weight:800;border-radius:999px;padding:7px 12px}
+.dish-content{padding:23px}
+.dish h3{font-size:1.22rem;color:var(--green);margin-bottom:5px}
+.dish p{color:var(--muted);margin-bottom:17px}
+.price{font-size:1.2rem;font-weight:850;color:var(--green)}
+.price small{font-size:.72rem;font-weight:700;color:var(--muted)}
+.about{background:#f1ecdf}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:58px}
+.about-photo{min-height:400px;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:#ddd}
+.about-copy p{color:#59675e}
+.about-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.about-point{padding:14px;background:rgba(255,255,255,.7);border-radius:13px;font-weight:700;color:var(--green);font-size:.92rem}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:stretch}
+.contact-panel{background:var(--green);color:white;border-radius:var(--radius);padding:32px}
+.contact-panel h3{font-size:1.55rem;margin-bottom:8px}
+.contact-panel>p{color:#dce8df}
+.contact-line{display:flex;gap:14px;padding:17px 0;border-bottom:1px solid rgba(255,255,255,.16)}
+.contact-line:last-of-type{border-bottom:0}
+.contact-icon{font-size:1.25rem}
+.contact-line strong{display:block}
+.contact-line span:last-child{color:#dce8df;font-size:.92rem}
+.contact-side{background:white;border:1px solid #eee9df;border-radius:var(--radius);padding:34px}
+.contact-side h3{font-size:1.45rem;color:var(--green)}
+.contact-side p{color:var(--muted)}
+.note{background:#fff5df;border-left:4px solid var(--gold);padding:14px 16px;border-radius:8px;color:#66502a;font-size:.9rem;margin-top:20px}
+footer{background:var(--green-dark);color:#d9e5dc;padding:28px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+footer .brand{color:white}
+footer small{color:#b8c9bd}
+
+/* Panier et commandes */
+.dish-content{display:flex;flex-direction:column;align-items:flex-start}
+.dish-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin-top:18px}
+.add-cart{border:0;border-radius:999px;background:var(--green);color:white;padding:11px 15px;font:inherit;font-size:.88rem;font-weight:800;cursor:pointer;transition:background .2s,transform .2s}
+.add-cart:hover{background:var(--green-dark);transform:translateY(-1px)}
+.cart-section{background:#fff}
+.cart-layout{display:grid;grid-template-columns:1fr .75fr;gap:28px;align-items:start}
+.cart-box,.order-box{border:1px solid #eee9df;border-radius:var(--radius);padding:25px;background:var(--cream)}
+.cart-box h3,.order-box h3{color:var(--green);margin-bottom:15px}
+.cart-empty{color:var(--muted);padding:16px 0}
+.cart-items{display:grid;gap:12px}
+.cart-item{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid #e6e0d5}
+.cart-item:last-child{border-bottom:0}
+.cart-item strong{display:block;color:var(--green)}
+.cart-item small{color:var(--muted)}
+.cart-controls{display:flex;align-items:center;gap:8px;margin-top:9px}
+.qty-btn,.remove-btn{border:1px solid #d9dfd9;background:white;border-radius:8px;padding:4px 9px;cursor:pointer;font-weight:800;color:var(--green)}
+.remove-btn{color:#9a3a2d}
+.cart-line-total{font-weight:800;white-space:nowrap}
+.cart-total{display:flex;justify-content:space-between;gap:15px;border-top:2px solid #d9dfd9;margin-top:18px;padding-top:18px;font-size:1.15rem;font-weight:900;color:var(--green)}
+.order-box label{display:block;font-size:.9rem;font-weight:750;margin:14px 0 6px}
+.order-box input,.order-box textarea{width:100%;border:1px solid #d8ddd6;border-radius:10px;padding:12px;font:inherit;background:white;color:var(--ink)}
+.order-box textarea{min-height:85px;resize:vertical}
+.order-box .btn{width:100%;margin-top:16px;border:0;cursor:pointer}
+.order-help{font-size:.84rem;color:var(--muted);margin:12px 0 0}
+.cart-count{display:inline-flex;align-items:center;justify-content:center;min-width:23px;height:23px;border-radius:99px;background:var(--gold);color:#172a1e;font-size:.76rem;padding:0 6px;margin-left:4px}
+@media(max-width:800px){.cart-layout{grid-template-columns:1fr}}
+
+@media(max-width:800px){
+ .hero-inner{grid-template-columns:1fr;min-height:0;padding-block:80px 75px}
+ .hero-card{justify-self:start;max-width:100%}
+ .features{grid-template-columns:repeat(2,1fr)}
+ .dishes{grid-template-columns:repeat(2,1fr)}
+ .about-grid,.contact-grid{grid-template-columns:1fr;gap:28px}
+ .about-photo{min-height:310px}
+}
+@media(max-width:560px){
+ .container{width:min(100% - 28px,1120px)}
+ .nav{min-height:68px;flex-wrap:wrap}
+ .menu-toggle{display:block}
+ nav{display:none;flex-direction:column;align-items:stretch;gap:0;width:100%;padding:0 0 14px}
+ nav.open{display:flex}
+ nav a{padding:11px 4px;border-top:1px solid #e9e3d7}
+ .hero-inner{padding-block:68px 62px}
+ h1{font-size:3.45rem}
+ .features{gap:10px;margin-top:-22px}
+ .feature{padding:17px 14px}
+ section{padding:68px 0}
+ .dishes{grid-template-columns:1fr}
+ .dish-photo{height:230px}
+ .about-points{grid-template-columns:1fr}
+ .contact-panel,.contact-side{padding:24px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#accueil"><span>♨</span>Le Palmier</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <nav id="mainNav" aria-label="Navigation principale">
+      <a href="#accueil">Accueil</a><a href="#menu">Menu</a><a href="#apropos">À propos</a><a href="#contact">Contact</a><a href="#panier">Panier <span class="cart-count" id="navCartCount">0</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="accueil">
+  <div class="container hero-inner">
+    <div>
+      <div class="eyebrow">Bienvenue chez nous</div>
+      <h1>Le Palmier<span>Bar-Restaurant</span></h1>
+      <p>Découvrez une cuisine savoureuse, des boissons fraîches et une ambiance conviviale pour vos repas entre amis ou en famille.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#menu">Découvrir le menu ↓</a>
+        <a class="btn btn-outline" href="#contact">Commander <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <div class="emoji">🌴</div>
+      <h3>Un moment à partager</h3>
+      <p>Une cuisine généreuse et un cadre accueillant pour tous vos moments.</p>
+    </aside>
+  </div>
+</section>
+
+<div class="container features" aria-label="Nos atouts">
+  <article class="feature"><div class="emoji">🍽️</div><h3>Plats savoureux</h3><p>Une cuisine généreuse</p></article>
+  <article class="feature"><div class="emoji">🥤</div><h3>Boissons fraîches</h3><p>Jus et rafraîchissements</p></article>
+  <article class="feature"><div class="emoji">👨‍👩‍👧‍👦</div><h3>Cadre agréable</h3><p>Pour tous vos moments</p></article>
+  <article class="feature"><div class="emoji">📱</div><h3>Commande facile</h3><p>Contact direct</p></article>
+</div>
+
+<section id="menu">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">À la carte</div>
+      <h2>Nos plats populaires</h2>
+      <p>Exemples de plats et de prix à remplacer par les informations du restaurant.</p>
+    </div>
+    <div class="dishes">
+      <article class="dish">
+        <div class="dish-photo"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=85" alt="Viande grillée" loading="lazy"><span class="tag">Le favori</span></div>
+        <div class="dish-content"><h3>Poisson ou viande braisée</h3><p>Accompagnement au choix</p><div class="dish-actions"><div class="price">5 000 <small>FCFA</small></div><button class="add-cart" type="button" data-id="braise" data-name="Poisson ou viande braisée" data-price="5000">＋ Ajouter au panier</button></div></div>
+      </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=85" alt="Plat de riz" loading="lazy"><span class="tag">Généreux</span></div>
+        <div class="dish-content"><h3>Riz accompagné</h3><p>Sauce et garniture</p><div class="dish-actions"><div class="price">3 500 <small>FCFA</small></div><button class="add-cart" type="button" data-id="riz" data-name="Riz accompagné" data-price="3500">＋ Ajouter au panier</button></div></div>
+      </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="https://images.unsplash.com/photo-1521997888045-7b9e9e7b8f42?auto=format&fit=crop&w=900&q=85" alt="Brochettes grillées" loading="lazy"><span class="tag">À partager</span></div>
+        <div class="dish-content"><h3>Brochettes</h3><p>Avec frites ou salade</p><div class="dish-actions"><div class="price">4 000 <small>FCFA</small></div><button class="add-cart" type="button" data-id="brochettes" data-name="Brochettes" data-price="4000">＋ Ajouter au panier</button></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section class="cart-section" id="panier">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Votre sélection</div>
+      <h2>Votre panier</h2>
+      <p>Ajoutez vos plats, ajustez les quantités et envoyez votre commande complète sur WhatsApp.</p>
+    </div>
+    <div class="cart-layout">
+      <div class="cart-box">
+        <h3>Menus sélectionnés <span class="cart-count" id="cartCount">0</span></h3>
+        <div id="cartItems" class="cart-empty" aria-live="polite">Votre panier est vide. Ajoutez un plat depuis le menu.</div>
+        <div class="cart-total"><span>Total à payer</span><span id="cartTotal">0 FCFA</span></div>
+      </div>
+      <form class="order-box" id="orderForm">
+        <h3>Finaliser la commande</h3>
+        <label for="customerName">Votre nom (facultatif)</label>
+        <input id="customerName" name="customerName" autocomplete="name" placeholder="Nom du client">
+        <label for="customerPhone">Votre téléphone (facultatif)</label>
+        <input id="customerPhone" name="customerPhone" type="tel" autocomplete="tel" placeholder="Votre numéro">
+        <label for="customerNote">Précisions sur la commande (facultatif)</label>
+        <textarea id="customerNote" name="customerNote" placeholder="Ex. : sans piment, livraison, adresse…"></textarea>
+        <button class="btn btn-primary" type="submit">Commander sur WhatsApp ↗</button>
+        <p class="order-help">WhatsApp s'ouvrira avec le détail des plats, les quantités et le total. Vérifiez le numéro du restaurant dans le code avant publication.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="apropos">
+  <div class="container about-grid">
+    <div class="about-photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1100&q=85" alt="Table dressée dans un restaurant" loading="lazy"></div>
+    <div class="about-copy">
+      <div class="eyebrow">À propos de nous</div>
+      <h2>Un bon repas,<br>une bonne ambiance</h2>
+      <p>Le Palmier est présenté ici comme un lieu accueillant où partager un repas et passer un bon moment. Ce texte est un exemple personnalisable pour votre client.</p>
+      <div class="about-points"><div class="about-point">✓ Cuisine généreuse</div><div class="about-point">✓ Cadre convivial</div><div class="about-point">✓ Pour les familles</div><div class="about-point">✓ Commande facile</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Contact</div>
+      <h2>Nous sommes à votre écoute</h2>
+      <p>Pour toute question ou commande, retrouvez ici les coordonnées du restaurant.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-panel">
+        <h3>Parlons de votre prochaine commande</h3>
+        <p>Contactez-nous pour connaître les disponibilités et passer votre commande.</p>
+        <div class="contact-line"><span class="contact-icon">📞</span><div><strong>Téléphone</strong><span>À compléter</span></div></div>
+        <div class="contact-line"><span class="contact-icon">📍</span><div><strong>Adresse</strong><span>À compléter, Bénin</span></div></div>
+        <div class="contact-line"><span class="contact-icon">🕒</span><div><strong>Horaires</strong><span>À confirmer</span></div></div>
+      </div>
+      <div class="contact-side">
+        <h3>Une commande en quelques clics</h3>
+        <p>Le bouton WhatsApp doit être relié au vrai numéro du restaurant avant publication.</p>
+        <!-- Remplacez 229XXXXXXXX par le numéro WhatsApp réel au format international, sans + ni espaces. -->
+        <a class="btn btn-primary" href="https://wa.me/22954218182" target="_blank" rel="noopener noreferrer" id="whatsappLink">📱 Ouvrir WhatsApp</a>
+        <div class="note"><strong>À personnaliser :</strong> téléphone, adresse, horaires, numéro WhatsApp, plats, prix et photos. Les informations affichées actuellement sont des exemples.</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="#accueil"><span>♨</span>Le Palmier</a>
+    <small>Le Palmier — Bar-Restaurant · Maquette de démonstration · Informations fictives</small>
+    <a href="#accueil">Retour en haut ↑</a>
+  </div>
+</footer>
+<script>
+const toggle = document.getElementById('menuToggle');
+const nav = document.getElementById('mainNav');
+toggle.addEventListener('click', () => {
+  const isOpen = nav.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', String(isOpen));
+  toggle.textContent = isOpen ? '✕' : '☰';
+});
+nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+  nav.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.textContent = '☰';
+}));
+
+// Panier entièrement dynamique côté navigateur
+const cart = new Map();
+const formatFCFA = value => new Intl.NumberFormat('fr-FR').format(value) + ' FCFA';
+
+function renderCart() {
+  const cartItems = document.getElementById('cartItems');
+  const cartCount = document.getElementById('cartCount');
+  const navCartCount = document.getElementById('navCartCount');
+  const cartTotal = document.getElementById('cartTotal');
+  let quantityTotal = 0;
+  let priceTotal = 0;
+
+  cart.forEach(item => {
+    quantityTotal += item.quantity;
+    priceTotal += item.price * item.quantity;
+  });
+
+  cartCount.textContent = quantityTotal;
+  navCartCount.textContent = quantityTotal;
+  cartTotal.textContent = formatFCFA(priceTotal);
+
+  if (cart.size === 0) {
+    cartItems.className = 'cart-empty';
+    cartItems.textContent = 'Votre panier est vide. Ajoutez un plat depuis le menu.';
+    return;
+  }
+
+  cartItems.className = 'cart-items';
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'cart-item';
+
+    const details = document.createElement('div');
+    const name = document.createElement('strong');
+    name.textContent = item.name;
+    const unit = document.createElement('small');
+    unit.textContent = formatFCFA(item.price) + ' / unité';
+    const controls = document.createElement('div');
+    controls.className = 'cart-controls';
+
+    const minus = document.createElement('button');
+    minus.type = 'button';
+    minus.className = 'qty-btn';
+    minus.textContent = '−';
+    minus.setAttribute('aria-label', 'Retirer une unité de ' + item.name);
+    minus.addEventListener('click', () => updateQuantity(item.id, -1));
+
+    const qty = document.createElement('span');
+    qty.textContent = item.quantity;
+
+    const plus = document.createElement('button');
+    plus.type = 'button';
+    plus.className = 'qty-btn';
+    plus.textContent = '+';
+    plus.setAttribute('aria-label', 'Ajouter une unité de ' + item.name);
+    plus.addEventListener('click', () => updateQuantity(item.id, 1));
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'remove-btn';
+    remove.textContent = 'Supprimer';
+    remove.addEventListener('click', () => {
+      cart.delete(item.id);
+      renderCart();
+    });
+
+    controls.append(minus, qty, plus, remove);
+    details.append(name, unit, controls);
+
+    const lineTotal = document.createElement('div');
+    lineTotal.className = 'cart-line-total';
+    lineTotal.textContent = formatFCFA(item.price * item.quantity);
+    row.append(details, lineTotal);
+    cartItems.append(row);
+  });
+}
+
+function updateQuantity(id, delta) {
+  const item = cart.get(id);
+  if (!item) return;
+  item.quantity += delta;
+  if (item.quantity <= 0) cart.delete(id);
+  renderCart();
+}
+
+document.querySelectorAll('.add-cart').forEach(button => {
+  button.addEventListener('click', () => {
+    const id = button.dataset.id;
+    const existing = cart.get(id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.set(id, {
+        id,
+        name: button.dataset.name,
+        price: Number(button.dataset.price),
+        quantity: 1
+      });
+    }
+    renderCart();
+    const oldText = button.textContent;
+    button.textContent = '✓ Ajouté';
+    window.setTimeout(() => { button.textContent = oldText; }, 900);
+  });
+});
+
+document.getElementById('orderForm').addEventListener('submit', event => {
+  event.preventDefault();
+  if (cart.size === 0) {
+    alert('Votre panier est vide. Ajoutez au moins un plat avant de commander.');
+    return;
+  }
+
+  // Remplacez ce numéro par celui du restaurant au format international, sans + ni espaces.
+  const whatsappNumber = '22954218182';
+  if (whatsappNumber.includes('X')) {
+    alert('Le numéro WhatsApp du restaurant doit être configuré dans le code avant de pouvoir envoyer la commande.');
+    return;
+  }
+
+  const customerName = document.getElementById('customerName').value.trim();
+  const customerPhone = document.getElementById('customerPhone').value.trim();
+  const customerNote = document.getElementById('customerNote').value.trim();
+  let total = 0;
+  const lines = ['Bonjour Le Palmier, je souhaite passer cette commande :', ''];
+
+  cart.forEach(item => {
+    const lineTotal = item.price * item.quantity;
+    total += lineTotal;
+    lines.push(`• ${item.name} x ${item.quantity} — ${formatFCFA(lineTotal)}`);
+  });
+
+  lines.push('', `TOTAL : ${formatFCFA(total)}`);
+  if (customerName) lines.push('', `Nom : ${customerName}`);
+  if (customerPhone) lines.push(`Téléphone : ${customerPhone}`);
+  if (customerNote) lines.push(`Précisions : ${customerNote}`);
+  lines.push('', 'Merci.');
+
+  const url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(lines.join('\n'));
+  window.open(url, '_blank', 'noopener,noreferrer');
+});
+
+renderCart();
+</script>
+</body>
+</html>
